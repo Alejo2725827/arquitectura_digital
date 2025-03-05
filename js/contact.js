@@ -16,7 +16,7 @@ document.addEventListener("click", function (event) {
         const message = `¡Hola! Mi nombre es *${name}* y estoy interesado en el servicio de *${service}*.  
         Puedes ver más información aquí: ${websiteURL}`;
 
-        const whatsappURL = `https://wa.me/573158505020?text=${encodeURIComponent(message)}`;
+        const whatsappURL = `https://wa.me/573002725827?text=${encodeURIComponent(message)}`;
 
         console.log('🔗 Abriendo WhatsApp:', whatsappURL);
         window.open(whatsappURL, "_blank");
