@@ -19,7 +19,7 @@ body {
 
 header {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     padding: 15px;
     background-color: #e3f2fd;
@@ -40,7 +40,7 @@ nav ul {
 }
 
 main {
-    padding: 20px;
+    padding: 5% 20% 5% 20%;
     text-align: center;
     flex-grow: 1;
 }
@@ -53,6 +53,7 @@ footer {
 
 .simple-title {
     font-size: 1rem;
+    color: black;
 }
 
 .titulo {
@@ -169,19 +170,6 @@ footer {
     transform: scale(1.1);
 }
 
-/* @media (max-width: 768px) {
-    .navbar {
-        flex-direction: column;
-        gap: 10px;
-        padding: 10px;
-    }
-
-    .navbar a {
-        display: block;
-        text-align: center;
-        width: 100%;
-    }
-} */
 .menu-toggle {
     display: none;
     font-size: 24px;
@@ -190,10 +178,15 @@ footer {
     cursor: pointer;
     padding: 10px;
     order: 2;
+    color: var(--primary);
 }
 
 /* Estilos para pantallas pequeñas */
 @media (max-width: 768px) {
+    main {
+        padding: 5% 1% 5% 1%;
+    }
+
     .menu-toggle {
         display: block;
     }
