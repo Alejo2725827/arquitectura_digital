@@ -13,19 +13,17 @@
     <div class="container">
         <header>
             <div class="titulo">
-                <span class="simple-title">Arquitectura</span> <span class="digital">
-                    <span class="di">Di</span>
-                    <span class="gi">gi</span>
-                    <span class="tal">tal</span>
+                <span class="simple-title">Arquitectura</span>
+                <span class="digital">
+                    <span class="di">Di</span><span class="gi">gi</span><span class="tal">tal</span>
                 </span>
                 <div class="spiral-circles"></div>
             </div>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
             <nav>
                 <ul class="navbar">
-                    <li><a href="#home" onclick="navigate(event, 'pages/home.html')">Inicio</a></li>
-                    <!-- <li><a href="#nosotros" onclick="navigate(event, 'pages/about_us.html')">Nosotros</a></li>
-                    <li><a href="#servicios" onclick="navigate(event, 'pages/products.html')">Servicios</a></li> -->
-                    <li><a href="#contacto" onclick="navigate(event, 'pages/contact.html')">Contacto</a></li>
+                    <li><a href="#home" onclick="navigate(event, 'home')">Inicio</a></li>
+                    <li><a href="#contacto" onclick="navigate(event, 'contact')">Contacto</a></li>
                 </ul>
             </nav>
         </header>
@@ -40,24 +38,41 @@
     </div>
 
     <script>
-        function navigate(event, page) {
-            event.preventDefault();
+        function navigate(event, section) {
+            if (event) event.preventDefault();
+
+            const page = `pages/${section}.html`;
+            console.log('Cargando página:', page);
             fetch(page)
-                .then(response => response.text())
+                .then(response => {
+                    if (!response.ok) throw new Error('Página no encontrada');
+                    return response.text();
+                })
                 .then(html => {
                     document.getElementById('content').innerHTML = html;
-                    window.history.pushState({ page }, '', '#' + page);
+                    window.history.pushState({ section }, '', '#' + section);
                 })
-                .catch(error => console.error('Error cargando la página:', error));
+                .catch(error => {
+                    console.error('Error cargando la página:', error);
+                    document.getElementById('content').innerHTML = '<h2>Error al cargar la página</h2>';
+                });
         }
 
         window.addEventListener('popstate', (event) => {
-            const page = event.state?.page || 'pages/home.html';
-            navigate(new Event('popstate'), page);
+            const section = event.state?.section || 'home';
+            navigate(null, section);
         });
 
-        // Cargar la página inicial
-        navigate(new Event('load'), 'pages/home.html');
+        // Cargar la página inicial según el hash o por defecto 'home'
+        window.onload = () => {
+            const section = location.hash.replace('#', '') || 'home';
+            navigate(null, section);
+        };
+
+        function toggleMenu() {
+            document.querySelector(".navbar").classList.toggle("show");
+        }
+
     </script>
 </body>
 

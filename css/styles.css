@@ -23,6 +23,7 @@ header {
     align-items: center;
     padding: 15px;
     background-color: #e3f2fd;
+    position: relative;
 }
 
 .logo {
@@ -168,7 +169,7 @@ footer {
     transform: scale(1.1);
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     .navbar {
         flex-direction: column;
         gap: 10px;
@@ -179,5 +180,39 @@ footer {
         display: block;
         text-align: center;
         width: 100%;
+    }
+} */
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    order: 2;
+}
+
+/* Estilos para pantallas pequeñas */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .navbar {
+        display: none;
+        /* Oculta el menú */
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        background: white;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 15px;
+        border-radius: 10px;
+    }
+
+    .navbar.show {
+        display: flex;
+        /* Muestra el menú cuando se activa */
     }
 }
