@@ -143,20 +143,32 @@
 
             const page = `pages/${section}.html`;
             console.log('Cargando página:', page);
+
             fetch(page)
                 .then(response => {
                     if (!response.ok) throw new Error('Página no encontrada');
                     return response.text();
                 })
                 .then(html => {
-                    document.getElementById('content').innerHTML = html;
+                    const contentDiv = document.getElementById('content');
+                    contentDiv.innerHTML = html;
                     window.history.pushState({ section }, '', '#' + section);
+
+                    // Si es la sección de contacto, cargar el script solo si aún no ha sido agregado
+                    if (section === "contact" && !document.getElementById("contact-script")) {
+                        const script = document.createElement("script");
+                        script.src = "js/contact.js";
+                        script.id = "contact-script"; // Asignamos un ID para identificarlo
+                        script.onload = () => console.log("✅ Script contact.js cargado correctamente");
+                        document.body.appendChild(script);
+                    }
                 })
                 .catch(error => {
                     console.error('Error cargando la página:', error);
                     document.getElementById('content').innerHTML = '<h2>Error al cargar la página</h2>';
                 });
         }
+
 
         window.addEventListener('popstate', (event) => {
             const section = event.state?.section || 'home';
@@ -206,8 +218,9 @@
                 sendMessage();
             }
         }
-    </script>
 
+
+    </script>
 </body>
 
 </html>
