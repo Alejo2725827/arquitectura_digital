@@ -114,7 +114,7 @@ footer {
 .spiral-circles::before {
     content: "";
     position: absolute;
-    width: 8px;
+    width: 4px;
     aspect-ratio: 1;
     inset: auto 0 16px;
     margin: auto;

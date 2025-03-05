@@ -9,11 +9,11 @@
 
     <div class="image-gallery">
         <div class="image-card">
-            <img src="img/img1.jpg" alt="Desarrollo de Software">
+            <img src="img/img1.jpeg" alt="Desarrollo de Software">
             <p>Desarrollo de Software</p>
         </div>
         <div class="image-card">
-            <img src="img/img2.jpg" alt="APIs y Webhooks">
+            <img src="img/img5.jpg" alt="APIs y Webhooks">
             <p>APIs y Webhooks</p>
         </div>
         <div class="image-card">
@@ -94,13 +94,20 @@
 
     .image-gallery {
         display: flex;
-        align-items: center;
+        align-items: stretch;
+        /* Para que todas las cards tengan la misma altura */
         gap: 20px;
         min-width: 300px;
     }
 
     .image-card {
         width: 250px;
+        min-height: 320px;
+        /* Altura mínima estándar */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        /* Asegura que el contenido esté distribuido */
         text-align: center;
         background: #fff;
         padding: 10px;
@@ -110,14 +117,23 @@
 
     .image-card img {
         width: 100%;
-        height: auto;
+        height: 180px;
+        /* Altura fija para las imágenes */
+        object-fit: cover;
+        /* Evita deformaciones y mantiene la proporción */
         border-radius: 10px;
     }
 
     .image-card p {
         font-size: 16px;
         margin-top: 10px;
+        flex-grow: 1;
+        /* Hace que el texto ocupe el espacio disponible */
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
+
 
     @media (max-width: 768px) {
         .content-wrapper {
