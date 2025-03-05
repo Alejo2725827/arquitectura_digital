@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arquitectura Digital</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="titulo">
+                <span class="simple-title">Arquitectura</span> <span class="digital">
+                    <span class="di">Di</span>
+                    <span class="gi">gi</span>
+                    <span class="tal">tal</span>
+                </span>
+                <div class="spiral-circles"></div>
+            </div>
+            <nav>
+                <ul class="navbar">
+                    <li><a href="#home" onclick="navigate(event, 'pages/home.html')">Inicio</a></li>
+                    <!-- <li><a href="#nosotros" onclick="navigate(event, 'pages/about_us.html')">Nosotros</a></li>
+                    <li><a href="#servicios" onclick="navigate(event, 'pages/products.html')">Servicios</a></li> -->
+                    <li><a href="#contacto" onclick="navigate(event, 'pages/contact.html')">Contacto</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main id="content">
+            <h1>Cargando...</h1>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Arquitectura Digital Colombia</p>
+        </footer>
+    </div>
+
+    <script>
+        function navigate(event, page) {
+            event.preventDefault();
+            fetch(page)
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('content').innerHTML = html;
+                    window.history.pushState({ page }, '', '#' + page);
+                })
+                .catch(error => console.error('Error cargando la página:', error));
+        }
+
+        window.addEventListener('popstate', (event) => {
+            const page = event.state?.page || 'pages/home.html';
+            navigate(new Event('popstate'), page);
+        });
+
+        // Cargar la página inicial
+        navigate(new Event('load'), 'pages/home.html');
+    </script>
+</body>
+
+</html>
