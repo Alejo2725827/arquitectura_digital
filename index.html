@@ -213,7 +213,7 @@
             input.value = "";
         }
 
-        async function sendMessageChatGPT(userMessage = null) {
+        async function sendMessageChatGPT(userMessage = null, isButton = false, questionId = null) {
             const input = document.getElementById("chatInput");
             const message = userMessage || input.value.trim();
             if (message === "") return;
@@ -227,7 +227,11 @@
                 const response = await fetch("http://127.0.0.1:8000/chat", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ message })
+                    body: JSON.stringify({
+                        message,
+                        is_button_response: isButton,
+                        question_id: questionId // Asegurar que se envía el question_id correcto
+                    })
                 });
 
                 if (!response.ok) {
@@ -235,12 +239,20 @@
                 }
 
                 const data = await response.json();
-                const source = data.source === "chatgpt" ? "(Respuesta AI 🤖)" : "(Respuesta Predefinida ✅)";
+                // const source = data?.source === "chatgpt" ? "(Respuesta AI 🤖)" : "(Respuesta Predefinida ✅)";
 
-                // Mostrar la respuesta del bot
-                chatBody.innerHTML += `<p><strong>Bot ${source}:</strong> ${data.response}</p>`;
+                // chatBody.innerHTML += `<p><strong>Bot ${source}:</strong> ${data.response}</p>`;
 
-                // Si hay opciones, mostrar botones en el chat
+                //Si desea recibir respuesta vía whatsapp
+                if (data.response == "ENVIAR_WHATSAPP") {
+                    chatBody.innerHTML += `<p><strong>Bot</strong> Redirigiendo a whatsapp...</p>`;
+                    enviarMensajeWhatsApp();
+                    return
+                }
+
+                chatBody.innerHTML += `<p><strong>Bot</strong> ${data.response}</p>`;
+
+                // Si hay opciones, agregar botones dinámicamente
                 if (data.options) {
                     const buttonContainer = document.createElement("div");
                     buttonContainer.classList.add("button-container");
@@ -248,27 +260,39 @@
                     data.options.forEach(option => {
                         const button = document.createElement("button");
                         button.textContent = option;
-                        button.classList.add("options-btn"); // Clase actualizada
-                        button.onclick = () => sendMessageChatGPT(option);
+                        button.classList.add("options-btn");
+                        button.onclick = () => sendMessageChatGPT(option, true, data.question_id); // Ahora pasamos `data.question_id`
                         buttonContainer.appendChild(button);
                     });
 
                     chatBody.appendChild(buttonContainer);
                 }
+
             } catch (error) {
                 console.error("Error en la solicitud:", error);
                 chatBody.innerHTML += `<p><strong>Bot:</strong> Error en el servidor.</p>`;
             }
         }
 
-
-
-
+        // Capturar "Enter" correctamente
         function handleKeyPress(event) {
             if (event.key === "Enter") {
-                sendMessageChatGPT();
+                sendMessageChatGPT(); // Solo enviamos el mensaje del input
             }
         }
+
+        function enviarMensajeWhatsApp() {
+
+            const websiteURL = "https://alejo2725827.github.io/arquitectura_digital";
+            const message = `¡Hola! Estoy interesado en el servicios de Arquitectura Digital. Puedes ver más información aquí: ${websiteURL}`;
+
+            const whatsappURL = `https://wa.me/573002725827?text=${encodeURIComponent(message)}`;
+
+            console.log('🔗 Abriendo WhatsApp:', whatsappURL);
+            window.open(whatsappURL, "_blank");
+        }
+
+
 
 
     </script>
