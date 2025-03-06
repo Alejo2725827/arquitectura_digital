@@ -220,3 +220,60 @@ footer {
         display: flex;
     }
 }
+
+/* Botones asistentes */
+/* Contenedor de botones */
+.button-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* Botones elegantes */
+/* Contenedor de botones */
+.button-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+/* Botones elegantes tipo "chips" */
+.options-btn {
+    background-color: transparent;
+    font-family: 'Montserrat';
+    /* Gris azulado claro */
+    border: .5px solid #b0bec5;
+    /* Borde sutil */
+    padding: 8px 14px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #37474f;
+    /* Texto gris oscuro */
+    border-radius: 20px;
+    /* Redondeado tipo "chip" */
+    cursor: pointer;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    /* Sombra ligera */
+    transition: all 0.2s ease-in-out;
+    opacity: 0;
+    transform: translateY(5px);
+    animation: fadeIn 0.4s ease-out forwards;
+}
+
+/* Efecto hover */
+.options-btn:hover {
+    background-color: #cfd8dc;
+    /* Cambio sutil de color */
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.15);
+    transform: translateY(0);
+}
+
+/* Animación de aparición */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

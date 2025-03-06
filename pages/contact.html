@@ -2,16 +2,17 @@
     <div class="contact-form">
         <p class="titulo">Contáctanos</p>
         <form id="whatsapp-form">
-            <label for="name">📌 Nombre o Empresa:</label>
+            <label for="name">Nombre o Empresa:</label>
             <input type="text" id="name" name="name" placeholder="Escribe tu nombre o el nombre de tu empresa" required>
 
-            <label for="service">🛠️ Selecciona un servicio:</label>
+            <label for="service">Selecciona un servicio:</label>
             <select id="service" name="service" required>
                 <option value="" disabled selected>Seleccione un servicio</option>
                 <option value="Desarrollo de software">Desarrollo de software</option>
                 <option value="APIs y WebHooks">APIs y WebHooks</option>
                 <option value="Chatbots Inteligentes">Chatbots Inteligentes</option>
                 <option value="Servicios TI">Servicios TI</option>
+                <option value="Otros Servicios">Otros Servicios</option>
             </select>
 
             <button id="whatsapp" type="button" class="whatsapp-button">Enviar por WhatsApp</button>
@@ -62,6 +63,9 @@
         box-sizing: border-box;
     }
 
+    option:hover {
+        background-color: yellow;
+    }
 
     .whatsapp-button {
         margin-top: 15px;
