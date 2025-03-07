@@ -58,7 +58,7 @@
 
         .chat-body {
             padding: 10px;
-            height: 200px;
+            height: 300px;
             overflow-y: auto;
             font-size: 14px;
         }
@@ -130,6 +130,7 @@
         <div class="chat-header">Asistente Virtual</div>
         <div class="chat-body" id="chatBody">
             <p><strong>Bot:</strong> ¡Hola! ¿En qué puedo ayudarte?</p>
+            <!-- Agregado para hacer scroll -->
         </div>
         <div class="chat-footer">
             <input type="text" id="chatInput" placeholder="Escribe un mensaje..." onkeypress="handleKeyPress(event)">
@@ -259,6 +260,9 @@
 
                 chatBody.innerHTML += `<p><strong>Bot</strong> ${data.response}</p>`;
 
+                scrollToBottom();
+
+
                 // Si hay opciones, agregar botones dinámicamente
                 if (data.options) {
                     const buttonContainer = document.createElement("div");
@@ -297,6 +301,17 @@
 
             console.log('🔗 Abriendo WhatsApp:', whatsappURL);
             window.open(whatsappURL, "_blank");
+        }
+
+
+        function scrollToBottom() {
+            const chatBody = document.getElementById("chatBody");
+            setTimeout(() => {
+                const lastMessage = chatBody.lastElementChild;
+                if (lastMessage) {
+                    lastMessage.scrollIntoView({ behavior: "smooth" });
+                }
+            }, 100);
         }
 
 
