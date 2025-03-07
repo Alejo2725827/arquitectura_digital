@@ -214,6 +214,13 @@
         }
 
         async function sendMessageChatGPT(userMessage = null, isButton = false, questionId = null) {
+            const API_URL = window.location.hostname === "127.0.0.1"
+                ? "http://localhost:8000/chat"
+                : "https://chatbot.n7bq4a2jrnjtg.us-east-1.cs.amazonlightsail.com/chat";
+
+            console.log("API_URL:", API_URL);
+
+
             const input = document.getElementById("chatInput");
             const message = userMessage || input.value.trim();
             if (message === "") return;
@@ -224,7 +231,7 @@
             input.value = "";
 
             try {
-                const response = await fetch("http://127.0.0.1:8000/chat", {
+                const response = await fetch(API_URL, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
