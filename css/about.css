@@ -82,6 +82,10 @@ ul {
 }
 
 @media (max-width: 768px) {
+    .items li {
+        flex-direction: column;
+    }
+
     .about-section {
         flex-direction: column !important;
         text-align: center;
