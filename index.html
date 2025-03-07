@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/logo.css">
     <link rel="stylesheet" href="css/chatbot.css">
+    <link rel="stylesheet" href="css/loader.css">
 
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/about.css">
@@ -29,8 +30,8 @@
             <nav>
                 <ul class="navbar">
                     <li><a href="#home" onclick="navigate(event, 'home')">Inicio</a></li>
-                    <li><a href="#contacto" onclick="navigate(event, 'contact')">Contacto</a></li>
                     <li><a href="#about" onclick="navigate(event, 'about')">Nosotros</a></li>
+                    <li><a href="#contact" onclick="navigate(event, 'contact')">Contacto</a></li>
                 </ul>
             </nav>
         </header>
@@ -38,59 +39,6 @@
         <main id="content">
             <div class="loader"></div>
         </main>
-        <style>
-            .loader {
-                width: 48px;
-                height: 48px;
-                top: calc(50vh/2);
-                /* border: 3px dotted #FFF; */
-                border-style: solid solid dotted dotted;
-                border-radius: 50%;
-                display: inline-block;
-                position: relative;
-                box-sizing: border-box;
-                animation: rotation 2s linear infinite;
-            }
-
-            .loader::after {
-                content: '';
-                box-sizing: border-box;
-                position: absolute;
-                left: 0;
-                right: 0;
-                top: 0;
-                bottom: 0;
-                margin: auto;
-                border: 3px dotted #FF3D00;
-                border-style: solid solid dotted;
-                width: 24px;
-                height: 24px;
-                border-radius: 50%;
-                animation: rotationBack 1s linear infinite;
-                transform-origin: center center;
-            }
-
-            @keyframes rotation {
-                0% {
-                    transform: rotate(0deg);
-                }
-
-                100% {
-                    transform: rotate(360deg);
-                }
-            }
-
-            @keyframes rotationBack {
-                0% {
-                    transform: rotate(0deg);
-                }
-
-                100% {
-                    transform: rotate(-360deg);
-                }
-            }
-        </style>
-
         <footer>
             <p>&copy; 2025 Arquitectura Digital Colombia</p>
         </footer>

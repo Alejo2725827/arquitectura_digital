@@ -62,3 +62,10 @@ option:hover {
     background-color: #25D366;
     color: white;
 }
+
+@media (max-width: 768px) {
+
+    .content-wrapper {
+        padding: 10px !important;
+    }
+}

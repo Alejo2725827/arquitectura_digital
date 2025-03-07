@@ -66,6 +66,9 @@ footer p {
 
 
 .navbar {
+    position: relative;
+    z-index: 1000;
+    /* Asegura que el menú esté sobre otros elementos */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -106,6 +109,11 @@ footer p {
 
 
 @media (max-width: 768px) {
+
+    .content-wrapper {
+        padding: 0 !important;
+    }
+
     main {
         padding: 5% 1% 5% 1%;
     }
