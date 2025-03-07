@@ -250,15 +250,15 @@
                 // const source = data?.source === "chatgpt" ? "(Respuesta AI 🤖)" : "(Respuesta Predefinida ✅)";
 
                 // chatBody.innerHTML += `<p><strong>Bot ${source}:</strong> ${data.response}</p>`;
+                chatBody.innerHTML += `<p><strong>Bot</strong> ${data.response}</p>`;
 
                 //Si desea recibir respuesta vía whatsapp
-                if (data.response == "ENVIAR_WHATSAPP") {
-                    chatBody.innerHTML += `<p><strong>Bot</strong> Redirigiendo a whatsapp...</p>`;
-                    enviarMensajeWhatsApp();
-                    return
+                if (data.action == "ENVIAR_WHATSAPP") {
+                    setTimeout(() => {
+                        enviarMensajeWhatsApp()
+                    }, 2000);
                 }
 
-                chatBody.innerHTML += `<p><strong>Bot</strong> ${data.response}</p>`;
 
                 scrollToBottom();
 
