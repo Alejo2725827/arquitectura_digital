@@ -247,9 +247,7 @@
                 }
 
                 const data = await response.json();
-                // const source = data?.source === "chatgpt" ? "(Respuesta AI 🤖)" : "(Respuesta Predefinida ✅)";
 
-                // chatBody.innerHTML += `<p><strong>Bot ${source}:</strong> ${data.response}</p>`;
                 chatBody.innerHTML += `<p><strong>Bot</strong> ${data.response}</p>`;
 
                 //Si desea recibir respuesta vía whatsapp
