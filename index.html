@@ -39,7 +39,7 @@
             position: fixed;
             bottom: 90px;
             right: 20px;
-            width: auto;
+            width: 300px;
             background: white;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -68,20 +68,19 @@
             padding: 12px;
             border-top: 1px solid #ddd;
             gap: 8px;
-            /* Espaciado entre elementos */
         }
 
         .chat-footer input {
-            flex-grow: 1;
             padding: 12px;
             border: 1px solid #ddd;
             border-radius: 8px;
             font-size: 16px;
             min-height: 45px;
-            /* Mayor área táctil */
+            width: 70%;
         }
 
         .chat-footer button {
+            flex-grow: 1;
             background: transparent;
             color: var(--primary);
             border: none;
@@ -90,10 +89,8 @@
             margin-left: 5px;
             cursor: pointer;
             border-radius: 8px;
-            min-width: 80px;
-            /* Asegura que el botón sea más grande */
             min-height: 45px;
-            /* Mayor área táctil */
+            width: 30%;
         }
 
         .chat-footer button:hover {
@@ -101,21 +98,21 @@
             color: white;
         }
 
-        /* Ajustes específicos para móviles */
         @media (max-width: 600px) {
+            .chat-container {
+                width: 90vw;
+            }
+
             .chat-footer {
                 padding: 14px;
             }
 
             .chat-footer input {
                 font-size: 18px;
-                padding: 14px;
             }
 
             .chat-footer button {
                 font-size: 18px;
-                padding: 14px;
-                min-width: 90px;
             }
         }
     </style>
@@ -162,7 +159,7 @@
             <!-- Agregado para hacer scroll -->
         </div>
         <div class="chat-footer">
-            <input type="text" id="chatInput" placeholder="Escribe un mensaje..." onkeypress="handleKeyPress(event)">
+            <input type="text" id="chatInput" placeholder="Escribe..." onkeypress="handleKeyPress(event)">
             <button onclick="sendMessageChatGPT()">Enviar</button>
         </div>
     </div>
