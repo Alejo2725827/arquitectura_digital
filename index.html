@@ -274,7 +274,7 @@
 
                 const data = await response.json();
 
-                chatBody.innerHTML += `<p><strong>Bot</strong> ${data.response}</p>`;
+                chatBody.innerHTML += `<p><strong>Melissa:</strong> ${data.response}</p>`;
 
                 //Si desea recibir respuesta vía whatsapp
                 if (data.action == "ENVIAR_WHATSAPP") {
