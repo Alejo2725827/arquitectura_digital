@@ -118,10 +118,14 @@
 
     .image-gallery {
         display: flex;
-        align-items: stretch;
-        /* Para que todas las cards tengan la misma altura */
+        flex-wrap: wrap;
+        flex-grow: 1;
+        align-items: center;
+        justify-content: center;
+        /* align-items: stretch; */
+
         gap: 20px;
-        /* min-width: 300px; */
+        min-width: 300px;
     }
 
     .image-card {
