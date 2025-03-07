@@ -1,0 +1,79 @@
+.simple-title {
+    font-size: 1rem;
+    color: black;
+}
+
+.titulo {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 2rem;
+}
+
+
+.digital {
+
+    font-weight: bold;
+    display: inline-flex;
+    gap: 2px;
+}
+
+.di {
+    color: var(--primary);
+}
+
+.gi {
+    color: var(--txt-p);
+}
+
+.tal {
+    color: var(--secondary);
+}
+
+.spiral-circles {
+    width: 50px;
+    aspect-ratio: 1;
+    background:
+        radial-gradient(farthest-side, var(--secondary), 90%, #0000) center/22px 22px,
+        radial-gradient(farthest-side, var(--primary) 90%, #0000) bottom/8px 8px;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: -5px;
+    right: -40px;
+    border-radius: 50%;
+    transform-origin: center;
+    animation: l17 6s linear infinite;
+}
+
+
+
+.spiral-circles::before {
+    content: "";
+    position: absolute;
+    width: 4px;
+    aspect-ratio: 1;
+    inset: auto 0 16px;
+    margin: auto;
+    background: #ccc;
+    border-radius: 50%;
+    transform-origin: 50% calc(100% + 10px);
+    animation: inherit;
+    animation-duration: 1s;
+
+}
+
+@keyframes l17 {
+    100% {
+        transform: rotate(1turn)
+    }
+}
+
+.digital span {
+    transition: transform 0.3s ease, scale 0.3s ease;
+}
+
+.digital:hover span {
+    transform: rotate(-5deg);
+    scale: 1.1;
+}

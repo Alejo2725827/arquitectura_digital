@@ -1,0 +1,108 @@
+/* Chatbot */
+/* Estilos para el botón flotante */
+.chat-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 24px;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.chat-button:hover {
+    /* background-color: #0056b3; */
+    transform: scale(1.2);
+    /* Crecimiento suave */
+}
+
+/* Estilos para el contenedor del chat */
+.chat-container {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 300px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.chat-header {
+    background: var(--primary);
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.chat-body {
+    padding: 10px;
+    height: 300px;
+    overflow-y: auto;
+    font-size: 14px;
+}
+
+.chat-footer {
+    display: flex;
+    padding: 12px;
+    border-top: 1px solid #ddd;
+    gap: 8px;
+}
+
+.chat-footer input {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    min-height: 45px;
+    width: 70%;
+}
+
+.chat-footer button {
+    flex-grow: 1;
+    background: transparent;
+    color: var(--primary);
+    border: none;
+    padding: 12px 16px;
+    font-size: 16px;
+    margin-left: 5px;
+    cursor: pointer;
+    border-radius: 8px;
+    min-height: 45px;
+    width: 30%;
+}
+
+.chat-footer button:hover {
+    background: var(--primary);
+    color: white;
+}
+
+@media (max-width: 600px) {
+    .chat-container {
+        width: 90vw;
+    }
+
+    .chat-footer {
+        padding: 14px;
+    }
+
+    .chat-footer input {
+        font-size: 18px;
+    }
+
+    .chat-footer button {
+        font-size: 18px;
+    }
+}

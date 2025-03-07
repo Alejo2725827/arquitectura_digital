@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap');
+
+
+h1 {
+    font-size: 28px;
+    color: var(--txt-p);
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.about-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    margin-bottom: 30px;
+}
+
+.about-section h2 {
+    width: 40%;
+    font-size: 22px;
+    color: var(--primary);
+    font-weight: 600;
+    text-align: right;
+}
+
+.about-section p {
+    width: 60%;
+    font-size: 22px;
+    color: #555;
+    text-align: left;
+    line-height: 1.6;
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); */
+}
+
+.about-section:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+.items li {
+    display: flex;
+    justify-content: space-between;
+    font-size: 22px;
+    color: #444;
+    background: #f9f9f9;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Botón elegante */
+.services-button {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.contacto {
+    background: var(--secondary);
+    color: white;
+}
+
+.btn {
+    text-decoration: none;
+    font-size: 16px;
+    padding: 12px 20px;
+    border-radius: 8px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+    .about-section {
+        flex-direction: column !important;
+        text-align: center;
+    }
+
+    .about-section h2,
+    .about-section p {
+        width: 100%;
+        text-align: center;
+    }
+
+    .about-section p {
+        padding: 10px;
+    }
+}

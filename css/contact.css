@@ -1,0 +1,64 @@
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.contact-container {
+    display: flex;
+    justify-content: center;
+    padding: 0 40px 0 40px;
+    flex-wrap: wrap;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    /* max-width: 400px; */
+    /* width: 100%; */
+}
+
+.contact-form .titulo {
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.contact-form label {
+    display: block;
+    font-size: 16px;
+    margin: 10px 0 5px;
+}
+
+.contact-form input,
+.contact-form select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+option:hover {
+    background-color: yellow;
+}
+
+.whatsapp-button {
+    margin-top: 15px;
+    padding: 10px;
+    width: 100%;
+    font-size: 18px;
+    /* font-weight: bold; */
+    color: #25D366;
+    background-color: white;
+    border: 1.5px solid #25D366;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.whatsapp-button:hover {
+    background-color: #25D366;
+    color: white;
+}

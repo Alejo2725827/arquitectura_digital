@@ -6,116 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arquitectura Digital</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/logo.css">
+    <link rel="stylesheet" href="css/chatbot.css">
+
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/about.css">
+    <link rel="stylesheet" href="css/contact.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
-    <style>
-        /* Estilos para el botón flotante */
-        .chat-button {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            font-size: 24px;
-            /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .chat-button:hover {
-            /* background-color: #0056b3; */
-            transform: scale(1.2);
-            /* Crecimiento suave */
-        }
-
-        /* Estilos para el contenedor del chat */
-        .chat-container {
-            position: fixed;
-            bottom: 90px;
-            right: 20px;
-            width: 300px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            display: none;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        .chat-header {
-            background: var(--primary);
-            color: white;
-            padding: 10px;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        .chat-body {
-            padding: 10px;
-            height: 300px;
-            overflow-y: auto;
-            font-size: 14px;
-        }
-
-        .chat-footer {
-            display: flex;
-            padding: 12px;
-            border-top: 1px solid #ddd;
-            gap: 8px;
-        }
-
-        .chat-footer input {
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-            min-height: 45px;
-            width: 70%;
-        }
-
-        .chat-footer button {
-            flex-grow: 1;
-            background: transparent;
-            color: var(--primary);
-            border: none;
-            padding: 12px 16px;
-            font-size: 16px;
-            margin-left: 5px;
-            cursor: pointer;
-            border-radius: 8px;
-            min-height: 45px;
-            width: 30%;
-        }
-
-        .chat-footer button:hover {
-            background: var(--primary);
-            color: white;
-        }
-
-        @media (max-width: 600px) {
-            .chat-container {
-                width: 90vw;
-            }
-
-            .chat-footer {
-                padding: 14px;
-            }
-
-            .chat-footer input {
-                font-size: 18px;
-            }
-
-            .chat-footer button {
-                font-size: 18px;
-            }
-        }
-    </style>
 </head>
 
 <body>
@@ -133,13 +30,66 @@
                 <ul class="navbar">
                     <li><a href="#home" onclick="navigate(event, 'home')">Inicio</a></li>
                     <li><a href="#contacto" onclick="navigate(event, 'contact')">Contacto</a></li>
+                    <li><a href="#about" onclick="navigate(event, 'about')">Nosotros</a></li>
                 </ul>
             </nav>
         </header>
 
         <main id="content">
-            <h1>Cargando...</h1>
+            <div class="loader"></div>
         </main>
+        <style>
+            .loader {
+                width: 48px;
+                height: 48px;
+                top: calc(50vh/2);
+                /* border: 3px dotted #FFF; */
+                border-style: solid solid dotted dotted;
+                border-radius: 50%;
+                display: inline-block;
+                position: relative;
+                box-sizing: border-box;
+                animation: rotation 2s linear infinite;
+            }
+
+            .loader::after {
+                content: '';
+                box-sizing: border-box;
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                margin: auto;
+                border: 3px dotted #FF3D00;
+                border-style: solid solid dotted;
+                width: 24px;
+                height: 24px;
+                border-radius: 50%;
+                animation: rotationBack 1s linear infinite;
+                transform-origin: center center;
+            }
+
+            @keyframes rotation {
+                0% {
+                    transform: rotate(0deg);
+                }
+
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+
+            @keyframes rotationBack {
+                0% {
+                    transform: rotate(0deg);
+                }
+
+                100% {
+                    transform: rotate(-360deg);
+                }
+            }
+        </style>
 
         <footer>
             <p>&copy; 2025 Arquitectura Digital Colombia</p>
@@ -163,185 +113,7 @@
             <button onclick="sendMessageChatGPT()">Enviar</button>
         </div>
     </div>
-
-    <script>
-        function navigate(event, section) {
-            if (event) event.preventDefault();
-
-            const page = `pages/${section}.html`;
-            console.log('Cargando página:', page);
-
-            fetch(page)
-                .then(response => {
-                    if (!response.ok) throw new Error('Página no encontrada');
-                    return response.text();
-                })
-                .then(html => {
-                    const contentDiv = document.getElementById('content');
-                    contentDiv.innerHTML = html;
-                    window.history.pushState({ section }, '', '#' + section);
-
-                    // Si es la sección de contacto, cargar el script solo si aún no ha sido agregado
-                    if (section === "contact" && !document.getElementById("contact-script")) {
-                        const script = document.createElement("script");
-                        script.src = "js/contact.js";
-                        script.id = "contact-script"; // Asignamos un ID para identificarlo
-                        script.onload = () => console.log("✅ Script contact.js cargado correctamente");
-                        document.body.appendChild(script);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error cargando la página:', error);
-                    document.getElementById('content').innerHTML = '<h2>Error al cargar la página</h2>';
-                });
-        }
-
-
-        window.addEventListener('popstate', (event) => {
-            const section = event.state?.section || 'home';
-            navigate(null, section);
-        });
-
-        window.onload = () => {
-            const section = location.hash.replace('#', '') || 'home';
-            navigate(null, section);
-        };
-
-        function toggleMenu() {
-            document.querySelector(".navbar").classList.toggle("show");
-        }
-
-        function toggleChat() {
-            const chat = document.getElementById("chatContainer");
-            chat.style.display = chat.style.display === "flex" ? "none" : "flex";
-        }
-
-        function sendMessage() {
-            const input = document.getElementById("chatInput");
-            const message = input.value.trim();
-            if (message === "") return;
-
-            const chatBody = document.getElementById("chatBody");
-
-            // Agregar mensaje del usuario
-            const userMessage = document.createElement("p");
-            userMessage.innerHTML = `<strong>Tú:</strong> ${message}`;
-            chatBody.appendChild(userMessage);
-
-            // Simular respuesta del bot
-            setTimeout(() => {
-                const botMessage = document.createElement("p");
-                botMessage.innerHTML = `<strong>Melissa:</strong> ¡Gracias por tu mensaje!`;
-                chatBody.appendChild(botMessage);
-
-                chatBody.scrollTop = chatBody.scrollHeight; // Desplazar hacia abajo
-            }, 1000);
-
-            input.value = "";
-        }
-
-        async function sendMessageChatGPT(userMessage = null, isButton = false, questionId = null) {
-            const API_URL = window.location.hostname === "127.0.0.1"
-                ? "http://localhost:8000/chat"
-                : "https://chatbot.n7bq4a2jrnjtg.us-east-1.cs.amazonlightsail.com/chat";
-
-            console.log("API_URL:", API_URL);
-
-
-            const input = document.getElementById("chatInput");
-            const message = userMessage || input.value.trim();
-            if (message === "") return;
-
-            const chatBody = document.getElementById("chatBody");
-            chatBody.innerHTML += `<p><strong>Tú:</strong> ${message}</p>`;
-
-            input.value = "";
-
-            try {
-                const response = await fetch(API_URL, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        message,
-                        is_button_response: isButton,
-                        question_id: questionId // Asegurar que se envía el question_id correcto
-                    })
-                });
-
-                if (!response.ok) {
-                    throw new Error(`Error en el servidor: ${response.status}`);
-                }
-
-                const data = await response.json();
-
-                chatBody.innerHTML += `<p><strong>Melissa:</strong> ${data.response}</p>`;
-
-                //Si desea recibir respuesta vía whatsapp
-                if (data.action == "ENVIAR_WHATSAPP") {
-                    setTimeout(() => {
-                        enviarMensajeWhatsApp()
-                    }, 2000);
-                }
-
-
-                scrollToBottom();
-
-
-                // Si hay opciones, agregar botones dinámicamente
-                if (data.options) {
-                    const buttonContainer = document.createElement("div");
-                    buttonContainer.classList.add("button-container");
-
-                    data.options.forEach(option => {
-                        const button = document.createElement("button");
-                        button.textContent = option;
-                        button.classList.add("options-btn");
-                        button.onclick = () => sendMessageChatGPT(option, true, data.question_id); // Ahora pasamos `data.question_id`
-                        buttonContainer.appendChild(button);
-                    });
-
-                    chatBody.appendChild(buttonContainer);
-                }
-
-            } catch (error) {
-                console.error("Error en la solicitud:", error);
-                chatBody.innerHTML += `<p><strong>Melissa:</strong> Error en el servidor.</p>`;
-            }
-        }
-
-        // Capturar "Enter" correctamente
-        function handleKeyPress(event) {
-            if (event.key === "Enter") {
-                sendMessageChatGPT(); // Solo enviamos el mensaje del input
-            }
-        }
-
-        function enviarMensajeWhatsApp() {
-
-            const websiteURL = "https://alejo2725827.github.io/arquitectura_digital";
-            const message = `¡Hola! Estoy interesado en el servicios de Arquitectura Digital. Puedes ver más información aquí: ${websiteURL}`;
-
-            const whatsappURL = `https://wa.me/573002725827?text=${encodeURIComponent(message)}`;
-
-            console.log('🔗 Abriendo WhatsApp:', whatsappURL);
-            window.open(whatsappURL, "_blank");
-        }
-
-
-        function scrollToBottom() {
-            const chatBody = document.getElementById("chatBody");
-            setTimeout(() => {
-                const lastMessage = chatBody.lastElementChild;
-                if (lastMessage) {
-                    lastMessage.scrollIntoView({ behavior: "smooth" });
-                }
-            }, 100);
-        }
-
-
-
-
-    </script>
+    <script src="js/index.js"></script>
 </body>
 
 </html>
