@@ -78,6 +78,9 @@ function toggleChat() {
 //     input.value = "";
 // }
 
+const chatHistory = [];
+
+
 async function sendMessageChatGPT(message = null) {
     const API_URL = window.location.hostname === "127.0.0.1"
         ? "http://localhost:8000/chat"
@@ -93,6 +96,13 @@ async function sendMessageChatGPT(message = null) {
 
     if (message === "") return;
 
+    chatHistory.push({ role: "user", content: message });
+
+    if (chatHistory.length > 3) {
+        chatHistory.splice(0, chatHistory.length - 3);
+    }
+
+
     const chatBody = document.getElementById("chatBody");
 
     // Escapar contenido del usuario para evitar inyecciones HTML
@@ -106,7 +116,7 @@ async function sendMessageChatGPT(message = null) {
         const response = await fetch(API_URL, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ message })
+            body: JSON.stringify({ message, history: chatHistory })
         });
 
         if (!response.ok) {
@@ -114,6 +124,7 @@ async function sendMessageChatGPT(message = null) {
         }
 
         const data = await response.json();
+        chatHistory.push({ role: "assistant", content: data.response });
 
         // Insertar respuesta sin escapado para permitir HTML enriquecido
         const botMessageContainer = document.createElement("div");
