@@ -110,13 +110,13 @@ async function sendMessageChatGPT(userMessage = null, isButton = false, question
 
         const data = await response.json();
 
-        chatBody.innerHTML += data.response;
+        chatBody.innerHTML += `<p><strong>Melissa:</strong></p> ${data.response}`;
 
         scrollToBottom();
 
     } catch (error) {
         console.error("Error en la solicitud:", error);
-        chatBody.innerHTML += `Error en el servidor.`;
+        chatBody.innerHTML += `<p><strong>Melissa:</strong> Error en el servidor.</p>`;
     }
 }
 
