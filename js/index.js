@@ -78,30 +78,29 @@ function toggleChat() {
 //     input.value = "";
 // }
 
-async function sendMessageChatGPT(userMessage = null, isButton = false, questionId = null) {
+async function sendMessageChatGPT() {
     const API_URL = window.location.hostname === "127.0.0.1"
         ? "http://localhost:8000/chat"
         : "https://chatbot.n7bq4a2jrnjtg.us-east-1.cs.amazonlightsail.com/chat";
 
-
     const input = document.getElementById("chatInput");
-    const message = userMessage || input.value.trim();
+    const message = input.value.trim();
     if (message === "") return;
 
     const chatBody = document.getElementById("chatBody");
-    chatBody.innerHTML += `<p><strong>Tú:</strong> ${message}</p>`;
 
+    // Escapar contenido del usuario para evitar inyecciones HTML
+    const escapedMessage = document.createElement("div");
+    escapedMessage.textContent = message;
+
+    chatBody.innerHTML += `<p><strong>Tú:</strong> ${escapedMessage.innerHTML}</p>`;
     input.value = "";
 
     try {
         const response = await fetch(API_URL, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                message,
-                is_button_response: isButton,
-                question_id: questionId // Asegurar que se envía el question_id correcto
-            })
+            body: JSON.stringify({ message })
         });
 
         if (!response.ok) {
@@ -110,7 +109,10 @@ async function sendMessageChatGPT(userMessage = null, isButton = false, question
 
         const data = await response.json();
 
-        chatBody.innerHTML += `<p><strong>Melissa:</strong></p> ${data.response}`;
+        // Insertar respuesta sin escapado para permitir HTML enriquecido
+        const botMessageContainer = document.createElement("div");
+        botMessageContainer.innerHTML = `<p><strong>Melissa:</strong></p> ${data.response}`;
+        chatBody.appendChild(botMessageContainer);
 
         scrollToBottom();
 

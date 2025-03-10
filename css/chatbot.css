@@ -106,3 +106,29 @@
         font-size: 18px;
     }
 }
+
+
+.chat-body ul {
+    padding-left: 20px;
+    margin: 5px 0;
+}
+
+.chat-body li {
+    list-style: none;
+    padding: 5px 0;
+}
+
+.chat-body li::before {
+    content: "✅ ";
+    /* Icono antes de cada elemento */
+    color: #2ecc71;
+}
+
+.chat-body a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.chat-body a:hover {
+    text-decoration: underline;
+}
