@@ -110,38 +110,13 @@ async function sendMessageChatGPT(userMessage = null, isButton = false, question
 
         const data = await response.json();
 
-        chatBody.innerHTML += `<p><strong>Melissa:</strong> ${data.response}</p>`;
-
-        //Si desea recibir respuesta vía whatsapp
-        if (data.action == "ENVIAR_WHATSAPP") {
-            setTimeout(() => {
-                enviarMensajeWhatsApp()
-            }, 2000);
-        }
-
+        chatBody.innerHTML += data.response;
 
         scrollToBottom();
 
-
-        // Si hay opciones, agregar botones dinámicamente
-        if (data.options) {
-            const buttonContainer = document.createElement("div");
-            buttonContainer.classList.add("button-container");
-
-            data.options.forEach(option => {
-                const button = document.createElement("button");
-                button.textContent = option;
-                button.classList.add("options-btn");
-                button.onclick = () => sendMessageChatGPT(option, true, data.question_id); // Ahora pasamos `data.question_id`
-                buttonContainer.appendChild(button);
-            });
-
-            chatBody.appendChild(buttonContainer);
-        }
-
     } catch (error) {
         console.error("Error en la solicitud:", error);
-        chatBody.innerHTML += `<p><strong>Melissa:</strong> Error en el servidor.</p>`;
+        chatBody.innerHTML += `Error en el servidor.`;
     }
 }
 
