@@ -78,13 +78,19 @@ function toggleChat() {
 //     input.value = "";
 // }
 
-async function sendMessageChatGPT() {
+async function sendMessageChatGPT(message = null) {
     const API_URL = window.location.hostname === "127.0.0.1"
         ? "http://localhost:8000/chat"
         : "https://chatbot.n7bq4a2jrnjtg.us-east-1.cs.amazonlightsail.com/chat";
 
     const input = document.getElementById("chatInput");
-    const message = input.value.trim();
+
+    if (!message) {
+
+        message = input.value.trim();
+
+    }
+
     if (message === "") return;
 
     const chatBody = document.getElementById("chatBody");
